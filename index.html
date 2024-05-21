@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lagringskostnad Beräkning</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .date {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .cost {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="date">
+            <p>Ankomstdatum: <span id="arrival-date">2023-08-03</span></p>
+            <p>Dagens datum: <span id="current-date"></span></p>
+        </div>
+        <div class="cost">
+            Lagringskostnad: <span id="storage-cost"></span> kr
+        </div>
+    </div>
+
+    <script>
+        // Ankomstdatum
+        const arrivalDate = new Date('2023-08-03');
+        // Dagens datum
+        const currentDate = new Date();
+        
+        // Beräkna skillnaden i dagar
+        const timeDifference = currentDate - arrivalDate;
+        const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+        
+        // Beräkna kostnaden
+        const freeDays = 4;
+        const dailyCost = 50;
+        const storageCost = (daysDifference - freeDays) * dailyCost;
+        
+        // Uppdatera sidan med datumen och kostnaden
+        document.getElementById('current-date').textContent = currentDate.toISOString().split('T')[0];
+        document.getElementById('storage-cost').textContent = storageCost > 0 ? storageCost : 0;
+    </script>
+</body>
+</html>
